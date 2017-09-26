@@ -1,0 +1,9 @@
+/.idea
+/.vertx
+/.gradle
+/bin
+/build
+node_modules
+npm-debug.log
+/logs/*log
+kotlin-vertx-boilerplate.iml

@@ -1,0 +1,68 @@
+buildscript {
+  ext.kotlin_version = '1.1.4-3'
+  ext.shadow_version = '2.0.0'
+  ext.functionale_version = '1.1'
+  ext.kovenant_version = '3.3.0'
+  ext.vertx_version = '3.4.1'
+  ext.slf4j_version = '1.7.25' // Logging in the app
+  ext.logback_version = '1.2.3' // Logging to a file, implements SLF4J API, so we can use it with slf4j
+  ext.klutter_version = '1.20.1' // to make Kovenant use the Vert.x once
+  ext.fuel_version = '1.7.0' // HTTP client
+  ext.kotson_version = '2.5.0' // JSON Parser
+  ext.jackson_version = '2.8.7' // for JSON responses
+
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
+      "com.github.jengelman.gradle.plugins:shadow:$shadow_version"
+  }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+  compile "org.funktionale:funktionale-all:$functionale_version"
+  compile "nl.komponents.kovenant:kovenant:$kovenant_version"
+  compile "uy.klutter:klutter-vertx3-jdk8:$klutter_version"
+
+  compile "com.github.kittinunf.fuel:fuel:$fuel_version"
+  compile "com.github.salomonbrys.kotson:kotson:$kotson_version"
+  compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
+
+  compile "io.vertx:vertx-core:$vertx_version"
+  compile "io.vertx:vertx-web:$vertx_version"
+  compile "io.vertx:vertx-web-templ-thymeleaf:$vertx_version"
+
+//  runtime "org.slf4j:slf4j-jdk14:$slf4j_version"
+  runtime "ch.qos.logback:logback-classic:$logback_version"
+  compile "org.slf4j:slf4j-api:$slf4j_version"
+}
+
+// this is made for watching classes to redeploy a verticle
+mainClassName = "io.vertx.core.Launcher"
+def mainVerticleName = "com.kanzitdinov.boilerplate.verticles.MainVerticle"
+def watchForChange = 'src/**/*.kt'
+def doOnChange = 'gradle classes'
+def configurationFile = 'conf/development.json'
+
+run{
+  args = ['run', mainVerticleName, "--redeploy=$watchForChange",
+          "--launcher-class=$mainClassName", "--on-redeploy=$doOnChange",
+          "-conf $configurationFile"]
+}
+
+compileKotlin {
+  kotlinOptions.jvmTarget= "1.8"
+}
