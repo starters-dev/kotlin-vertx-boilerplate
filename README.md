@@ -16,7 +16,7 @@
 * or to build a Jar and run in production mode
 ```sh
 $ gradle shadowJar
-$ java -cp build/libs/kotlin-vertx-boilerplate-all.jar io.vertx.core.Launcher n com.kanzitdinov.boilerplate.verticles.MainVerticle -conf conf/production.json
+$ java -cp build/libs/kotlin-vertx-boilerplate-all.jar io.vertx.core.Launcher run com.kanzitdinov.boilerplate.verticles.MainVerticle -conf conf/production.json
 ``` 
 
 #### API ENDPOINTS
