@@ -32,11 +32,7 @@ class MainVerticle: AbstractVerticle() {
         val logger = LoggerFactory.getLogger("VertxServer")
         val jsonMapper = jacksonObjectMapper()
 
-        val serverConfig = jsonMapper.readValue(config().getJsonObject("server").encode(), ServerConfig::class.java)
-        val serverPort = serverConfig.port
-        val enableCaching = serverConfig.caching
-
-        val staticHandler = StaticHandler.create().setWebRoot("public").setCachingEnabled(enableCaching)
+        val staticHandler = StaticHandler.create().setWebRoot("public")
 
         router.get("/home").handler { ctx ->
             val timeP = task { SimpleDateFormat().format(Date()) }
@@ -84,7 +80,7 @@ class MainVerticle: AbstractVerticle() {
 
         server
                 .requestHandler { router.accept(it) }
-                .listen(serverPort, { handler ->
+                .listen(Integer.getInteger("http.port", 8080), { handler ->
                     if (!handler.succeeded()) {
                         logger.error("Failed to listen on port 8080")
                     }

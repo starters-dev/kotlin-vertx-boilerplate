@@ -55,14 +55,35 @@ mainClassName = "io.vertx.core.Launcher"
 def mainVerticleName = "com.kanzitdinov.boilerplate.verticles.MainVerticle"
 def watchForChange = 'src/**/*.kt'
 def doOnChange = 'gradle classes'
-def configurationFile = 'conf/development.json'
 
 run{
   args = ['run', mainVerticleName, "--redeploy=$watchForChange",
-          "--launcher-class=$mainClassName", "--on-redeploy=$doOnChange",
-          "-conf $configurationFile"]
+          "--launcher-class=$mainClassName", "--on-redeploy=$doOnChange"]
 }
 
 compileKotlin {
   kotlinOptions.jvmTarget= "1.8"
+}
+
+// Naming and packaging settings for the "shadow jar".
+shadowJar {
+  baseName = 'app'
+  classifier = 'shadow'
+
+  manifest {
+    attributes 'Main-Verticle': mainVerticleName
+  }
+  mergeServiceFiles {
+    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+  }
+}
+
+// when we run `gradle wrapper`
+task wrapper(type: Wrapper) {
+  gradleVersion = '4.1'
+}
+
+// Heroku relies on the 'stage' task to deploy.
+task stage {
+  dependsOn shadowJar
 }
