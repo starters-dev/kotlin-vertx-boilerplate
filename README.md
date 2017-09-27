@@ -22,10 +22,10 @@ $ java -jar build/libs/app-shadow.jar
 ``` 
 
 ### Heroku deployment
-* `heroku login`
-* `heroku create`
-* `git push heroku master`
-* `heroku open`
+* `$ heroku login`
+* `$ heroku create`
+* `$ git push heroku master`
+* `$ heroku open`
 
 For more information check [this link](https://devcenter.heroku.com/articles/getting-started-with-kotlin).
 
