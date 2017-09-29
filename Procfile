@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dhttp.port=$PORT -jar build/libs/app-shadow.jar
+web: java -jar build/libs/app-shadow.jar

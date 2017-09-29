@@ -16,8 +16,6 @@
 * or to build a Jar and run in production mode
 ```sh
 $ gradle shadowJar
-$ java -cp build/libs/app-shadow.jar io.vertx.core.Launcher run com.kanzitdinov.boilerplate.verticles.MainVerticle
-or
 $ java -jar build/libs/app-shadow.jar
 ``` 
 
@@ -47,7 +45,6 @@ For more information check [this link](https://devcenter.heroku.com/articles/get
 
 #### What to add `Maybe ...`:
 - add `Vue.JS` support, improve html rendering part
-- transfer all handlers to `Handlers` package
 - add testing with [KotlinTest](https://github.com/kotlintest/kotlintest)
 - add `MongoDB` with other endpoints
 - add log-in / sign-up logic using `MongoDB`
