@@ -24,6 +24,9 @@ $ java -jar build/libs/app-shadow.jar
 * `$ heroku create`
 * `$ git push heroku master`
 * `$ heroku open`
+* **NOTE:** Don't forget to go to [Heroku dashboard](https://dashboard.heroku.com) → your app → Settings, and then add Config Vars: 
+    * `PORT=80` 
+    * `HOST=https://your-app-name.herokuapp.com` 
 
 For more information check [this link](https://devcenter.heroku.com/articles/getting-started-with-kotlin).
 
