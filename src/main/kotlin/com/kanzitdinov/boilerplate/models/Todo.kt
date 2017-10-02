@@ -2,11 +2,11 @@ package com.kanzitdinov.boilerplate.models
 
 import com.kanzitdinov.boilerplate.env.HOST
 import com.kanzitdinov.boilerplate.env.PORT
+import java.util.*
 
 data class Todo(
-        var id: String?,
+        var id: UUID? = UUID.randomUUID(),
         val title: String?,
-        var order: Int?,
         val completed: Boolean = false
 ) {
     var url : String = ""
