@@ -1,4 +1,4 @@
-package com.kanzitdinov.boilerplate.env
+package team.ggc.kanzitdinov.vertx_boilerplate.common
 
 private val DEFAULT_HOST = "localhost"
 private val DEFAULT_PORT = 8080

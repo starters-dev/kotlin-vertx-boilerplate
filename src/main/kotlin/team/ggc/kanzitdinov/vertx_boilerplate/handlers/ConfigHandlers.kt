@@ -1,4 +1,4 @@
-package com.kanzitdinov.boilerplate.handlers
+package team.ggc.kanzitdinov.vertx_boilerplate.handlers
 
 import io.vertx.core.http.HttpHeaders
 import io.vertx.core.http.HttpMethod
