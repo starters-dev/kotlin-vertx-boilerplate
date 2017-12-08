@@ -6,6 +6,7 @@ import team.ggc.kanzitdinov.vertx_boilerplate.services.TodosService
 import com.github.salomonbrys.kotson.fromJson
 import com.google.gson.Gson
 import io.vertx.ext.web.RoutingContext
+import team.ggc.kanzitdinov.vertx_boilerplate.common.safeLaunch
 import java.util.*
 
 class TodosHandlers() {
@@ -13,42 +14,52 @@ class TodosHandlers() {
     private val gson = Gson()
 
     suspend fun getTodos(ctx: RoutingContext) {
-        val todos = TodosService.find()
+        safeLaunch(ctx) {
+            val todos = TodosService.find()
 
-        ctx.response().endWithJson(todos)
+            ctx.response().endWithJson(todos)
+        }
     }
 
     suspend fun getTodoById(ctx: RoutingContext) {
-        val _id = UUID.fromString(ctx.request().getParam("id"))
+        safeLaunch(ctx) {
+            val _id = UUID.fromString(ctx.request().getParam("id"))
 
-        val _todo = TodosService.get(_id)
+            val _todo = TodosService.get(_id)
 
-        ctx.response().endWithJson(_todo)
+            ctx.response().endWithJson(_todo)
+        }
     }
 
     suspend fun createNewTodo(ctx: RoutingContext) {
-        val tmpTodo: Todo = gson.fromJson(ctx.bodyAsString)
-        val newTodo: Todo = Todo(title = tmpTodo.title, completed = tmpTodo.completed)
+        safeLaunch(ctx) {
+            val tmpTodo: Todo = gson.fromJson(ctx.bodyAsString)
+            val newTodo: Todo = Todo(title = tmpTodo.title, completed = tmpTodo.completed)
 
-        val _todo = TodosService.create(newTodo)
+            val _todo = TodosService.create(newTodo)
 
-        ctx.response().endWithJson(_todo)
+            ctx.response().endWithJson(_todo)
+        }
     }
 
     suspend fun updateTodoById(ctx: RoutingContext) {
-        val _id = UUID.fromString(ctx.request().getParam("id"))
-        val newTodo: Todo = gson.fromJson(ctx.bodyAsString)
+        safeLaunch(ctx) {
+            val _id = UUID.fromString(ctx.request().getParam("id"))
+            val newTodo: Todo = gson.fromJson(ctx.bodyAsString)
 
-        val _todo = TodosService.update(_id, newTodo)
+            val _todo = TodosService.update(_id, newTodo)
 
-        ctx.response().endWithJson(_todo)
+            ctx.response().endWithJson(_todo)
+        }
     }
 
     suspend fun removeTodoById(ctx: RoutingContext) {
-        val _id = UUID.fromString(ctx.request().getParam("id"))
+        safeLaunch(ctx) {
+            val _id = UUID.fromString(ctx.request().getParam("id"))
 
-        val _todo = TodosService.remove(_id)
+            val _todo = TodosService.remove(_id)
 
-        ctx.response().endWithJson(_todo)
+            ctx.response().endWithJson(_todo)
+        }
     }
 }

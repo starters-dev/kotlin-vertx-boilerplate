@@ -6,8 +6,10 @@ import io.vertx.ext.web.Route
 import io.vertx.ext.web.RoutingContext
 import io.vertx.kotlin.coroutines.dispatcher
 import kotlinx.coroutines.experimental.launch
+import team.ggc.kanzitdinov.vertx_boilerplate.models.CommonServiceError
 
-fun HttpServerResponse.endWithJson(obj: Any?) {
+fun HttpServerResponse.endWithJson(obj: Any?, statusCode: Int = 200) {
+    setStatusCode(statusCode)
     putHeader("Content-Type", "application/json; charset=utf-8").end(Json.encodePrettily(obj))
 }
 
@@ -25,6 +27,16 @@ fun Route.coroutineHandler(fn : suspend (RoutingContext) -> Unit) {
             } catch(e: Exception) {
                 ctx.fail(e)
             }
+        }
+    }
+}
+
+fun <T> safeLaunch(ctx: RoutingContext, body: suspend () -> T) {
+    launch(ctx.vertx().dispatcher()) {
+        try {
+            body()
+        } catch (e: Exception) {
+            ctx.response().endWithJson(CommonServiceError(e.localizedMessage, 501))
         }
     }
 }

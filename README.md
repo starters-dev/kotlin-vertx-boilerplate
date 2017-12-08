@@ -9,7 +9,7 @@
 ### How to run:
 
 * Clone the repo: `git clone https://github.com/kanzitelli/kotlin-vertx-boilerplate.git`
-* Rename the folder if needed: `mv kotlin-vertx-boilerplate new_name`
+* Rename the folder if needed: `mv kotlin-vertx-boilerplate new_name` (*note:* if you want to rename the package then it would be safer to do it directly in the IntelliJ Idea)
 * `$ cd new_name/`
 * `$ gradle build`
 * `$ gradle run`
@@ -33,6 +33,7 @@ For more information check [this link](https://devcenter.heroku.com/articles/get
 ### API ENDPOINTS
 * `/home{.json}` - returns `json` with information gathered from this [link](https://api.myjson.com/bins/6qk2h) with current time added to JSON response.
 * `/hello{.json}` - returns `json` with simple message `{ message: "Hello, World!" }`.
+* `/todos` - simple local (data stored in an array) implementation of todos CRUD actions .
 
 ### What's included:
 
