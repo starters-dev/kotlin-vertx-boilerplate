@@ -5,6 +5,7 @@ buildscript {
   ext.slf4j_version = '1.7.25' // Logging in the app
   ext.logback_version = '1.2.3' // Logging to a file, implements SLF4J API, so we can use it with slf4j
   ext.retrofit_version = '2.3.0' // HTTP client
+  ext.retrofit_coroutines_version = '0.8.2' // makes retrofit's calls work with coroutines
   ext.kotson_version = '2.5.0' // JSON (w/ Gson) parser
 
   repositories {
@@ -33,6 +34,7 @@ dependencies {
 
   compile "com.squareup.retrofit2:retrofit:$retrofit_version"
   compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+  compile "ru.gildor.coroutines:kotlin-coroutines-retrofit:$retrofit_coroutines_version"
 
   compile "io.vertx:vertx-core:$vertx_version"
   compile "io.vertx:vertx-web:$vertx_version"

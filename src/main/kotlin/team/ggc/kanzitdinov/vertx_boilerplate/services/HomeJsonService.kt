@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import team.ggc.kanzitdinov.vertx_boilerplate.common.await
+import ru.gildor.coroutines.retrofit.await
 import java.text.SimpleDateFormat
 import java.util.*
 
