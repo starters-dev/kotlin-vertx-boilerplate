@@ -1,11 +1,11 @@
 buildscript {
-  ext.kotlin_version = '1.2.0'
+  ext.kotlin_version = '1.2.20-eap-33'
   ext.vertx_version = '3.5.0'
   ext.shadow_version = '2.0.0'
   ext.slf4j_version = '1.7.25' // Logging in the app
   ext.logback_version = '1.2.3' // Logging to a file, implements SLF4J API, so we can use it with slf4j
   ext.retrofit_version = '2.3.0' // HTTP client
-  ext.retrofit_coroutines_version = '0.8.2' // makes retrofit's calls work with coroutines
+  ext.retrofit_coroutines_version = '0.9.0' // makes retrofit's calls work with coroutines
   ext.kotson_version = '2.5.0' // JSON (w/ Gson) parser
 
   repositories {
